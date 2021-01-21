@@ -1,47 +1,44 @@
 ﻿
+using System;
+
 namespace MyDictionaryProje
 {
     public class MyDictionary<TKey, TValue>
     {
-        private TKey[] keys;
-        private TValue[] values;
-        public TValue _exVal;
+        private TKey[] _keys;
+        private TValue[] _values;
+        private TKey[] _tempKey;
+        private TValue[] _tempValues;
 
         public MyDictionary()
         {
-            keys = new TKey[0];
-            values = new TValue[0];
+            _keys = new TKey[0];
+            _values = new TValue[0];
         }
 
         public void Add(TKey key, TValue value)
         {
-            TKey[] tempKey = keys;
-            TValue[] tempValue = values;
-            keys = new TKey[keys.Length + 1];
-            values = new TValue[values.Length + 1];
-            for (int i = 0; i < tempKey.Length; i++)
+            _tempKey = _keys;
+            _tempValues = _values;
+            _keys = new TKey[_keys.Length + 1];
+            _values = new TValue[_values.Length + 1];
+            for (int i = 0; i < _tempKey.Length; i++)
             {
-                keys[i] = tempKey[i];
+                _keys[i] = _tempKey[i];
             }
-            for (int j = 0; j < tempValue.Length; j++)
+            _keys[_keys.Length - 1] = key;
+            for (int j = 0; j < _tempValues.Length; j++)
             {
-                values[j] = tempValue[j];
+                _values[j] = _tempValues[j];
             }
-            keys[keys.Length - 1] = key;
-            values[values.Length - 1] = value;
+            _values[_values.Length - 1] = value;
         }
 
-        public TValue Yazdir(TKey key)
+        public int Count
         {
-            for (int i = 0; i < keys.Length; i++)
-            {
-                if (keys[i].Equals(key))
-                {
-                    return values[i];
-                }
-            }
-            return _exVal;
+            get { return _keys.Length; }
         }
+        
     }
 
 }
