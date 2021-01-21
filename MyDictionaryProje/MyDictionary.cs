@@ -1,9 +1,12 @@
-﻿namespace MyDictionaryProje
+﻿using System.Collections;
+
+namespace MyDictionaryProje
 {
     public class MyDictionary<TKey, TValue>
     {
         private TKey[] keys;
         private TValue[] values;
+        public TValue _exVal;
 
         public MyDictionary()
         {
@@ -29,14 +32,17 @@
             values[values.Length - 1] = value;
         }
 
-        public TKey[] Keys
+        public TValue Yazdir(TKey key)
         {
-            get { return keys; }
-        }
-
-        public TValue[] Values
-        {
-            get { return values; }
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (keys[i].Equals(key))
+                {
+                    return values[i];
+                }
+            }
+            return _exVal;
         }
     }
+
 }
